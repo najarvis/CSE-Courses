@@ -28,9 +28,16 @@ public class Polynomial {
 		String toReturn = "";
 		
 		for (int i = 0; i < terms.size(); i++){
-			if (i == terms.size() - 1)
+			if (terms.get(i).getCoef() < 0 && i == terms.size() - 1)
+				toReturn += "(" + terms.get(i).toString() + ")";
+			
+			else if (i == terms.size() - 1)
 				toReturn += terms.get(i).toString();
-			else 
+			
+			else if (terms.get(i).getCoef() < 0)
+				toReturn += "(" + terms.get(i).toString() + ") + ";
+			
+			else
 				toReturn += terms.get(i).toString() + " + ";
 		}
 		
@@ -52,7 +59,7 @@ public class Polynomial {
 	}
 	
 	public static void main(String[] args){
-		Polynomial defaultCubic = new Polynomial(new int[] {1, 1, 1}, new int[] {3, 2, 1});
+		Polynomial defaultCubic = new Polynomial(new int[] {1, -1, -1}, new int[] {3, 2, 1});
 		System.out.println(defaultCubic);
 		System.out.println(defaultCubic.evaluate(3));
 	}

@@ -46,4 +46,8 @@ public class Term implements Comparable{
 	public double evaluate(double val){
 		return coef * Math.pow(val, exp);
 	}
+	
+	public int getCoef(){
+		return this.coef;
+	}
 }
