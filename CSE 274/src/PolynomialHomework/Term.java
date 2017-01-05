@@ -1,6 +1,6 @@
 package PolynomialHomework;
 
-public class Term implements Comparable{
+public class Term implements Comparable<Term>{
 
 	private int coef;
 	private int exp;
@@ -33,7 +33,7 @@ public class Term implements Comparable{
 
 	// Terms are sorted by their coefficients
 	@Override
-	public int compareTo(Object otherTerm) {
+	public int compareTo(Term otherTerm) {
 		if (!(otherTerm instanceof Term)) return 0;
 		return ((Term)otherTerm).exp - this.exp;
 	}

@@ -11,7 +11,6 @@ public class Polynomial {
 		this(new int[0], new int[0]);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Polynomial(int[] coefs, int[] exps){
 		terms = new ArrayList<Term>();
 		
@@ -59,8 +58,8 @@ public class Polynomial {
 	}
 	
 	public static void main(String[] args){
-		Polynomial defaultCubic = new Polynomial(new int[] {1, -1, -1}, new int[] {3, 2, 1});
+		Polynomial defaultCubic = new Polynomial(new int[] {1, -1, -1}, new int[] {2, 3, 1});
 		System.out.println(defaultCubic);
-		System.out.println(defaultCubic.evaluate(3));
+		System.out.println("at x = 3 evaluates to " + defaultCubic.evaluate(3));
 	}
 }
