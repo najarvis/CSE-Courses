@@ -39,7 +39,6 @@ public class Term implements Comparable<Term>{
 	}
 	
 	public String toString(){
-		if (this.exp == 0) return "" + this.coef;
 		return "" + this.coef + "x^" + this.exp;
 	}
 	
@@ -49,5 +48,9 @@ public class Term implements Comparable<Term>{
 	
 	public int getCoef(){
 		return this.coef;
+	}
+	
+	public int getExp(){
+		return this.exp;
 	}
 }
