@@ -36,5 +36,25 @@ public class SortedListTests {
 			assertTrue(check(20));
 		}
 	}
+	
+	/**
+	 * Test for RemoveTests - jarvisna
+	 */
+	@Test
+	public void RemoveTests(){
+		SortedList<Integer> sortedList = new SortedList<Integer>();
+		sortedList.add(20);
+		sortedList.add(30);
+		sortedList.add(10);
+		sortedList.add(40);
+		sortedList.remove(30);
+		
+		SortedList<Integer> sortedListEquals = new SortedList<Integer>();
+		sortedList.add(20);
+		sortedList.add(10);
+		sortedList.add(40);
+		assertTrue(Arrays.equals(sortedList.toArray(), sortedListEquals.toArray()));
+		
+	}
 
 }

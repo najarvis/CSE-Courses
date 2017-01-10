@@ -1,6 +1,10 @@
 import java.util.*;
 import java.io.*;
 
+/**
+ * @author jarvisna (For the Homework section).
+ *
+ */
 public class Places {
 	private ArrayList<Location> places;
 	
@@ -23,7 +27,12 @@ public class Places {
 	 * @return set with all city names with the target zip code.
 	 */
 	public Set<String> getCityNameFromZipCode(int zipCode) {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (Location loc : places){
+			if (loc.zipCode == zipCode)
+				result.add(loc.cityName);
+		}
+		return result;
 	}
 	/**
 	 * Returns all the zipcodes that are contained in a particular city-state. The empty
@@ -33,7 +42,13 @@ public class Places {
 	 * @return set with all relevant zipcodes.
 	 */
 	public Set<Integer> getZipCodes(String cityName, String state) {
-		return null;
+		Set<Integer> result = new TreeSet<>();
+		for (Location loc : places){
+			if (loc.cityName.equals(cityName) && loc.state.equals(state)){
+				result.add(loc.zipCode);
+			}
+		}
+		return result;
 	}
 	/**
 	 * Returns a map that is keyed to state name. The values in the map is a set of
@@ -44,8 +59,23 @@ public class Places {
 	 * @return mapping from states to set of zipcodes.
 	 */
 	public Map<String, Set<Integer>> getZipCodesInStates() {
-		return null;
+		Map<String, Set<Integer>> result = new TreeMap<>();
+		for (String s : allStateNames()){
+			result.put(s, getZipCodes(s));
+		}
+		return result;
 	}
+	
+	public Set<Integer> getZipCodes(String state){
+		Set<Integer> result = new TreeSet<>();
+		for (Location loc : places){
+			if (loc.state.equals(state))
+				result.add(loc.zipCode);
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * Returns all the states that contain a particular city name. The empty
 	 * set is returned if the city name is not any state.
@@ -53,7 +83,13 @@ public class Places {
 	 * @return set of states that contain the target city.
 	 */
 	public Set<String> getStatesThatContainThisCity(String cityName) {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (Location loc : places){
+			if (loc.cityName == cityName){
+				result.add(loc.state);
+			}
+		}
+		return result;
 	}
 	/**
 	 * Returns the states that contain any of the target cities. The empty
@@ -63,7 +99,12 @@ public class Places {
 	 * @return set of states that contain any of the target cities.
 	 */
 	public Set<String> getStatesThatContainAnyOfTheseCities(Set<String> cityNames) {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (String c : cityNames){
+			result.addAll(getStatesThatContainThisCity(c));
+		}
+		
+		return result;
 	}
 	/**
 	 * Returns all zipcodes that are within a specified distance from a
@@ -84,7 +125,12 @@ public class Places {
 	 * @return mapping from states to set of city names.
 	 */
 	public Map<String, Set<String>> getCityNames() {
-		return null;
+		Map<String, Set<String>> result = new TreeMap<>();
+		for (String s : allStateNames()){
+			result.put(s, allCityNames(s));
+		}
+		
+		return result;
 	}
 	/**
 	 * Returns all city names that reside within a particular state.
@@ -92,7 +138,12 @@ public class Places {
 	 * @return set of city names
 	 */
 	public Set<String> allCityNames(String state) {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (Location loc : places){
+			if (loc.state.equals(state))
+				result.add(loc.cityName);
+		}
+		return result;
 	}
 	/**
 	 * Returns all city names that reside within any of the
@@ -101,21 +152,33 @@ public class Places {
 	 * @return set of city names
 	 */
 	public Set<String> allCityNames(Set<String> states) {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (String s : states){
+			result.addAll(allCityNames(s));
+		}
+		return result;
 	}
 	/**
 	 * Returns all city names in the entire database
 	 * @return set of city names
 	 */
 	public Set<String> allCityNames() {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (Location loc : places)
+			result.add(loc.cityName);
+		
+		return result;
 	}
 	/**
 	 * Returns all state names in the entire database
 	 * @return set of state names
 	 */
 	public Set<String> allStateNames() {
-		return null;
+		Set<String> result = new TreeSet<>();
+		for (Location loc : places)
+			result.add(loc.state);
+		
+		return result;
 	}
 	/**
 	 * Returns the city names that appear in both of the given
@@ -125,7 +188,10 @@ public class Places {
 	 * @return set of city names
 	 */
 	public Set<String> getCommonCityNames(String state1, String state2) {
-		return null;
+		Set<String> inState1 = allCityNames(state1);
+		Set<String> inState2 = allCityNames(state2);
+		inState1.retainAll(inState2);
+		return inState1;
 	}
 	/**
 	 * Ranked list of states, where the ranking is ascending order of number
@@ -152,15 +218,15 @@ public class Places {
 		System.out.println(places.getCityNameFromZipCode(45056));
 		System.out.println(places.getCityNameFromZipCode(10048));
 		System.out.println(places.allStateNames());
-		//System.out.println(places.allCityNames());
+//		System.out.println(places.allCityNames());
 		Set<String> smallStates = new TreeSet<>();
 		smallStates.add("HI");
-		//smallStates.add("AK");
+		smallStates.add("RI");
 		System.out.println(places.allCityNames(smallStates));
 		Map<String, Set<String>> cities = places.getCityNames();
-		System.out.println(cities.get("MI"));
+		System.out.println(cities.get("HI"));
 		System.out.println(places.getCommonCityNames("MI", "AK"));
-		System.out.println(places.cityNameInMostStates());
-		System.out.println(places.mostZipCodes());
+//		System.out.println(places.cityNameInMostStates());
+//		System.out.println(places.mostZipCodes());
 	}
 }

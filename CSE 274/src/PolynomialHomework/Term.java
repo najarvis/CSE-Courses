@@ -30,7 +30,7 @@ public class Term implements Comparable<Term>{
 	/**
 	 * Parses a string and returns a Term instance from it.
 	 * @param str The String to parse
-	 * @return A new Term based on the inputted String
+	 * @return A new Term based on the inputed String
 	 */
 	public static Term parse(String str){
 		int i = str.indexOf("x");
@@ -40,7 +40,7 @@ public class Term implements Comparable<Term>{
 	/**
 	 * A helper method to see if two Terms are combinable
 	 * @param otherTerm The other term to test
-	 * @return True if the exponenets of the terms are equal
+	 * @return True if the exponents of the terms are equal
 	 */
 	public boolean combinable(Term otherTerm){
 		return this.exp == otherTerm.exp;
