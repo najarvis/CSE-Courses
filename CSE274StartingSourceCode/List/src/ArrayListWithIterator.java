@@ -280,7 +280,10 @@ public class ArrayListWithIterator<T> implements ListWithIteratorInterface<T> {
 		
 		public void remove() {
 			throw new IllegalStateException("Not supported"); 
-	   } // end remove
+		} // end remove
+		
+		// Answer to question, an OK array is one that is a palindrome
+		// (the array is equivalent to the reverse of the array).
 		
 	} // end RevIteratorForArrayList
 	
